@@ -1,9 +1,29 @@
-<h1>here are all flights</h1>
+<h1>Pick your flight</h1>
 
-<% @flights.each do |f| %>
-<p>From: <%= f.from_airport.code%>
-to: <%= f.to_airport.code%>
-Departs at: <%= f.start.strftime("%b %d, %Y, %T")%>
-Flight duration: <%= f.duration%>
-</p>
+
+
+<div class="search">
+<%= form_with(url: root_path, method: :get) do |form| %>
+<%= form.label "From:" %>
+ <%= form.collection_select :from_airport_id, Airport.order(:code), :id, :code, prompt: true %><br>
+ <%= form.label "To:" %>
+ <%= form.collection_select :to_airport_id, Airport.order(:code), :id, :code, prompt: true %><br>
+ <%= form.label "Number of passengers:" %>
+ <%= form.select :passengers, [[1], [2], [3], [4]] %><br>
+ <%= form.label "date:" %>
+ <%= form.collection_select :start, @flights.order(:start), :start, :start_date_formatted %><br>
+  <%= form.submit "Search" %>
 <% end %>
+
+
+</div>
+<% if !params.empty? %>
+  <% @flights_from.order(:start).each do |f| %>
+  <p>From: <%= f.from_airport.code%>
+  to: <%= f.to_airport.code%> ||
+  Departs at: <%= f.start.strftime("%b %d, %Y")%>||
+  Flight duration: <%= f.duration%>
+  </p>
+  <% end %>
+<% end %>
+
