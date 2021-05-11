@@ -9,6 +9,5 @@ class FlightsController < ApplicationController
 
     end 
   end
-  
 
 end

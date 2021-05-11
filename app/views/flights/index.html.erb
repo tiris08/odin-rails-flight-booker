@@ -1,5 +1,7 @@
 <h1>Pick your flight</h1>
 
+
+
 <div class="search">
   <%= form_with(url: root_path, method: :get) do |form| %>
     <%= form.label "From:" %>
@@ -14,15 +16,16 @@
   <% end %>
 </div>
 
-<% if !params[:commit].blank? %>
-  <% @flights.order(:start).each do |f| %>
-    <p>From: <%= f.from_airport.code %>
-    to: <%= f.to_airport.code %> ||
-    Departs at: <%= f.start.strftime("%b %d, %Y %I:%M %p") %>||
-    Flight duration: <%= f.duration %>
-    </p>
+<% if !@flights.empty?%>
+  <%= form_with url: root_path, method: :get do |form| %>
+    <% @flights.order(:start).each do |f| %>
+      <%= form.hidden_field :passengers, value: params[:passengers] %>
+      <%= form.radio_button :flight_id, f.id %>
+      <%= form.label :flight_fid, "From: #{f.from_airport.code} to: #{f.to_airport.code}. Departs at: #{f.start} || Flight duration: #{f.duration}" %><br>
+    <% end %>
+    <%= form.submit "Book" %>
   <% end %>
- 
+<% elsif !params[:commit].blank? %>
   <% if params[:from_airport_id].blank? || params[:to_airport_id].blank? || params[:start].blank? %>
     <h3>All fields must be selected</h3>
   <% elsif @flights.empty? %>
