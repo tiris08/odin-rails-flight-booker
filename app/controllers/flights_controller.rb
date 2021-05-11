@@ -1,9 +1,12 @@
 class FlightsController < ApplicationController
   
   def index
-    @flights = Flight.all
+    @dates = Flight.order(:start).pluck(:start).map { |a| a.strftime("%Y-%m-%d")}.uniq
     if !params.empty?
-      @flights_from = Flight.where("from_airport_id = ?", params[:from_airport_id]).where("to_airport_id = ?", params[:to_airport_id]  )
+      @flights = Flight.order(:start).where("from_airport_id = ?", 
+        params[:from_airport_id]).where("to_airport_id = ?", params[:to_airport_id]).where("DATE(start) >= ? AND DATE(start) <= ?", 
+        params[:start], params[:start])
+
     end 
   end
   

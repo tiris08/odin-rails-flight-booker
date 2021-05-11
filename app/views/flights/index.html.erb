@@ -1,29 +1,34 @@
 <h1>Pick your flight</h1>
 
-
-
 <div class="search">
-<%= form_with(url: root_path, method: :get) do |form| %>
-<%= form.label "From:" %>
- <%= form.collection_select :from_airport_id, Airport.order(:code), :id, :code, prompt: true %><br>
- <%= form.label "To:" %>
- <%= form.collection_select :to_airport_id, Airport.order(:code), :id, :code, prompt: true %><br>
- <%= form.label "Number of passengers:" %>
- <%= form.select :passengers, [[1], [2], [3], [4]] %><br>
- <%= form.label "date:" %>
- <%= form.collection_select :start, @flights.order(:start), :start, :start_date_formatted %><br>
-  <%= form.submit "Search" %>
-<% end %>
-
-
+  <%= form_with(url: root_path, method: :get) do |form| %>
+    <%= form.label "From:" %>
+    <%= form.collection_select :from_airport_id, Airport.order(:code), :id, :code, prompt: true %>
+    <%= form.label "To:" %>
+    <%= form.collection_select :to_airport_id, Airport.order(:code), :id, :code, prompt: true %><br>
+    <%= form.label "Number of passengers:" %>
+    <%= form.select :passengers, [[1], [2], [3], [4]] %><br>
+    <%= form.label "date:" %>
+    <%= form.collection_select :start, @dates, :to_s, :to_s, prompt: true %><br>
+    <%= form.submit "Search" %>
+  <% end %>
 </div>
-<% if !params.empty? %>
-  <% @flights_from.order(:start).each do |f| %>
-  <p>From: <%= f.from_airport.code%>
-  to: <%= f.to_airport.code%> ||
-  Departs at: <%= f.start.strftime("%b %d, %Y")%>||
-  Flight duration: <%= f.duration%>
-  </p>
+
+<% if !params[:commit].blank? %>
+  <% @flights.order(:start).each do |f| %>
+    <p>From: <%= f.from_airport.code %>
+    to: <%= f.to_airport.code %> ||
+    Departs at: <%= f.start.strftime("%b %d, %Y %I:%M %p") %>||
+    Flight duration: <%= f.duration %>
+    </p>
+  <% end %>
+ 
+  <% if params[:from_airport_id].blank? || params[:to_airport_id].blank? || params[:start].blank? %>
+    <h3>All fields must be selected</h3>
+  <% elsif @flights.empty? %>
+    <h3>Sorry! At the moment there are no availeble flights for you</h3>
+    <p>Plese try to choose different date</p>
   <% end %>
 <% end %>
+
 

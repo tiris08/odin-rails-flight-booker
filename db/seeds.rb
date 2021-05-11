@@ -14,7 +14,7 @@ require 'faker'
 
 10.times do
   Flight.create(
-    start: Faker::Date.forward(days: 30),
+    start: Faker::Time.forward(days: 30,  period: :all),
     duration: "3 hours",
     from_airport_id: 10,
     to_airport_id: 11
@@ -22,7 +22,7 @@ require 'faker'
 end
 10.times do
   Flight.create(
-    start: Faker::Date.forward(days: 30),
+    start: Faker::Time.forward(days: 30,  period: :all),
     duration: "2 hours",
     from_airport_id: 10,
     to_airport_id: 12
@@ -30,7 +30,7 @@ end
 end
 10.times do
   Flight.create(
-    start: Faker::Date.forward(days: 30),
+    start: Faker::Time.forward(days: 30,  period: :all),
     duration: "3 hours",
     from_airport_id: 11,
     to_airport_id: 10
@@ -38,7 +38,7 @@ end
 end
 10.times do
   Flight.create(
-    start: Faker::Date.forward(days: 30),
+    start: Faker::Time.forward(days: 30,  period: :all),
     duration: "4 hours",
     from_airport_id: 11,
     to_airport_id: 12
@@ -46,7 +46,7 @@ end
 end
 10.times do
   Flight.create(
-    start: Faker::Date.forward(days: 30),
+    start: Faker::Time.forward(days: 30,  period: :all),
     duration: "2 hours",
     from_airport_id: 12,
     to_airport_id: 11
@@ -54,7 +54,7 @@ end
 end
 10.times do
   Flight.create(
-    start: Faker::Date.forward(days: 30),
+    start: Faker::Time.forward(days: 30,  period: :all),
     duration: "4 hours",
     from_airport_id: 12,
     to_airport_id: 10
