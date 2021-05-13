@@ -1,20 +1,20 @@
 
-<h3>Flight №<%= @flight.id%>
-From: <%= @flight.from_airport.code %> to:
-<%= @flight.to_airport.code %><br>
-Departs at: <%= @flight.start %>
+<h3>Flight №<%= @booking.flight.id%>
+From: <%= @booking.flight.from_airport.code %> to:
+<%= @booking.flight.to_airport.code %><br>
+Departs at: <%= @booking.flight.start %>
 </h3>
 <h1>Passengers info<h1>
 <div class="pf">
 <%= form_with model: @booking do |booking_f| %>
-<%= booking_f.hidden_field :flight_id, value:params[:flight_id] %>
-<%= booking_f.hidden_field :tickets, value:params[:tickets] %>
+<%= booking_f.hidden_field :flight_id %>
+<%= booking_f.hidden_field :tickets %>
 <ul>
     <%= booking_f.fields_for :passengers do |addresses_form| %>
       <li>
         <%= addresses_form.label :name %>
         <%= addresses_form.text_field :name %>
-
+    
         <%= addresses_form.label :email %>
         <%= addresses_form.text_field :email %>
 
