@@ -22,3 +22,13 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+   <% @booking.passengers.each_with_index do |passenger, i| %>
+    <%= booking_f.fields_for passenger, index: passenger.id do |passenger_f| %>
+      <%= "Passanger №#{i+1}"<br> %>
+      <%= passenger_f.label :name %>
+      <%= passenger_f.text_field :name %><br>
+      <%= passenger_f.label :email %>
+      <%= passenger_f.text_field :email %><br>
+      <% end %>
+   <% end %> 

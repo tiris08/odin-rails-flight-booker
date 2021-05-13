@@ -19,3 +19,12 @@
 body {
   text-align: center;
 }
+
+.pf {
+  font-size: medium;
+  font-weight: lighter;
+}
+.showpas {
+  text-align: left;
+  display: inline-block;
+}

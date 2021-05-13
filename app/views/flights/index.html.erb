@@ -17,9 +17,9 @@
 </div>
 
 <% if !@flights.empty?%>
-  <%= form_with url: root_path, method: :get do |form| %>
+  <%= form_with url: new_booking_path, method: :get do |form| %>
     <% @flights.order(:start).each do |f| %>
-      <%= form.hidden_field :passengers, value: params[:passengers] %>
+      <%= form.hidden_field :tickets, value: params[:passengers] %>
       <%= form.radio_button :flight_id, f.id %>
       <%= form.label :flight_fid, "From: #{f.from_airport.code} to: #{f.to_airport.code}. Departs at: #{f.start} || Flight duration: #{f.duration}" %><br>
     <% end %>
