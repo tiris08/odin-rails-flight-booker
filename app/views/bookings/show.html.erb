@@ -1,12 +1,14 @@
-<h3>Flight №<%= @booking.flight.id%>
-From: <%= @booking.flight.from_airport.code %> to:
-<%= @booking.flight.to_airport.code %><br>
-Departs at: <%= @booking.flight.start %>
+<h3>Flight №<%= @booking.flight.id %>
+  From: <%= @booking.flight.from_airport.code %> to:
+  <%= @booking.flight.to_airport.code %><br>
+  Departs at: <%= @booking.flight.start %>
 </h3>
+
 <div class="showpas">
-<h2>Your personal info</h1>
-<% @booking.passengers.each do |pas| %>
-<%= pas.name %><br>
-<%= pas.email %><br>
-<% end %>
+  <h2>Your personal info</h2>
+
+  <% @booking.passengers.each do |pas| %>
+    <%= pas.name %><br>
+    <%= pas.email %><br>
+  <% end %>
 </div>
